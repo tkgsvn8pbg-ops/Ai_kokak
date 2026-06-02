@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 국악 놀이 마법사</title>
+<style>
+body{margin:0;padding:20px;font-family:'Malgun Gothic',sans-serif;background:linear-gradient(135deg,#fff7e6,#ffe0b2);}
+.container{max-width:900px;margin:auto;background:white;padding:30px;border-radius:20px;box-shadow:0 0 20px rgba(0,0,0,0.15);}
+h1{text-align:center;color:#d35400;}
+.card{margin-top:20px;padding:20px;background:#fff8f0;border-radius:15px;}
+label{display:block;margin-top:15px;font-weight:bold;}
+input,select{width:100%;padding:10px;margin-top:5px;border-radius:10px;border:1px solid #ccc;}
+button{margin-top:20px;width:100%;padding:15px;border:none;border-radius:10px;background:#e67e22;color:white;font-size:18px;cursor:pointer;}
+.result{margin-top:25px;padding:20px;border-radius:15px;background:#fdf2e9;}
+.item{margin-bottom:15px;font-size:18px;}
+.title{color:#c0392b;font-weight:bold;}
+.score{text-align:center;font-size:24px;color:#e74c3c;margin-top:20px;}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>🎭 AI 국악 놀이 마법사 🎶</h1>
+<div class="card">
+<label>이름</label>
+<input type="text" id="name" placeholder="이름 입력">
+<label>오늘의 기분</label>
+<select id="mood">
+<option>신나요</option><option>행복해요</option><option>설레요</option><option>용감해요</option><option>즐거워요</option>
+</select>
+<label>좋아하는 활동</label>
+<select id="activity">
+<option>축구</option><option>줄넘기</option><option>춤추기</option><option>달리기</option><option>노래하기</option>
+</select>
+<label>좋아하는 동물</label>
+<select id="animal">
+<option>호랑이</option><option>토끼</option><option>강아지</option><option>고양이</option><option>독수리</option>
+</select>
+<button onclick="generateGame()">✨ 국악 놀이 만들기</button>
+</div>
+<div id="result"></div>
+</div>
+<script>
+function randomItem(arr){return arr[Math.floor(Math.random()*arr.length)];}
+function generateGame(){
+let name=document.getElementById("name").value;
+if(name===""){alert("이름을 입력하세요!");return;}
+let mood=document.getElementById("mood").value;
+let activity=document.getElementById("activity").value;
+let animal=document.getElementById("animal").value;
+let characterNames=["덩기덕","얼쑤","쿵덕","자진모리","세마치","풍물"];
+let cheers=["얼쑤!","좋다!","얼씨구!","잘한다!","신난다!"];
+let rhythms=["덩기덕 쿵덕","덩 덕 쿵 덕","덩기덕 덩덕 쿵덕","쿵덕 쿵덕 덩기덕","덩덕궁 덩덕궁"];
+let motions=["제자리 점프하기","친구와 손뼉치기","빙글빙글 돌기","발 구르기","어깨춤 추기"];
+let resultHTML=`
+<div class="result">
+<div class="item"><span class="title">🎭 국악 캐릭터</span><br>${randomItem(characterNames)+animal}</div>
+<div class="item"><span class="title">🎵 말붙임새</span><br>${name}이가 ${activity}하며 신나게 놀아간다!</div>
+<div class="item"><span class="title">🥁 장단</span><br>${randomItem(rhythms)}</div>
+<div class="item"><span class="title">📣 추임새</span><br>${randomItem(cheers)}</div>
+<div class="item"><span class="title">💃 국악 놀이 미션</span><br>① ${randomItem(motions)}<br>② ${randomItem(motions)}<br>③ ${randomItem(motions)}</div>
+<div class="item"><span class="title">🌈 오늘의 국악 운세</span><br>${mood} 기운이 가득한 국악 명인!</div>
+<div class="score">🏆 ${name} 국악 레벨 +10</div>
+</div>`;
+document.getElementById("result").innerHTML=resultHTML;
+}
+</script>
+</body>
+</html>
